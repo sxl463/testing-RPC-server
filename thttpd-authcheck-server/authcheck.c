@@ -272,7 +272,7 @@ b64_decode( const char* str, unsigned char* space, int size )
 
 
 /* Returns -1 == unauthorized, 0 == no auth file, 1 = authorized. */
-/*
+
 static int
 auth_check( httpd_conn* hc, char* dirname  )
     {
@@ -298,7 +298,6 @@ auth_check( httpd_conn* hc, char* dirname  )
     printf("Before return auth_check2:\n");
     return auth_check2( hc, dirname );
     }
-*/
 
 /* Returns -1 == unauthorized, 0 == no auth file, 1 = authorized. */
 static int
@@ -932,30 +931,30 @@ my_auth_check2_1_svc(shttpd_conn* shc, struct svc_req *rqstp)
 
 //static int str_alloc_count = 0;
 //static size_t str_alloc_size = 0;
-int* read_alloc_count_1_svc(void* pv, struct svc_req*){
+int* read_alloc_count_1_svc(void* pv, struct svc_req* rqstp){
 	static int ret;
-	printf("read_alloc_count called...\n");
+//	printf("read_alloc_count called...\n");
 	ret = str_alloc_count;
 	return(&ret);
 }
 
-int* read_alloc_size_1_svc(void* pv, struct svc_req*){
+int* read_alloc_size_1_svc(void* pv, struct svc_req* rqstp){
 	static int ret;
-	printf("read_alloc_size called...\n");
+//	printf("read_alloc_size called...\n");
 	ret = str_alloc_size;
 	return(&ret);
 }
 
-int* write_alloc_count_1_svc(int* i, struct svc_req*){
+int* write_alloc_count_1_svc(int* i, struct svc_req* rqstp){
 	static int ret;
-	printf("write_alloc_count called...\n");
+//	printf("write_alloc_count called...\n");
 	str_alloc_count = i;
 	return(&ret);
 }
 
-int* write_alloc_size_1_svc(int* i, struct svc_req*){
+int* write_alloc_size_1_svc(int* i, struct svc_req* rqstp){
 	static int ret;
-	printf("write_alloc_size called...\n");
+//	printf("write_alloc_size called...\n");
 	str_alloc_size = i;
 	return(&ret);
 }

@@ -21,8 +21,6 @@ authprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 {
 	union {
 		shttpd_conn my_auth_check2_1_arg;
-		int write_alloc_count_1_arg;
-		int write_alloc_size_1_arg;
 	} argument;
 	char *result;
 	xdrproc_t _xdr_argument, _xdr_result;
@@ -37,30 +35,6 @@ authprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		_xdr_argument = (xdrproc_t) xdr_shttpd_conn;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) my_auth_check2_1_svc;
-		break;
-
-	case read_alloc_count:
-		_xdr_argument = (xdrproc_t) xdr_void;
-		_xdr_result = (xdrproc_t) xdr_int;
-		local = (char *(*)(char *, struct svc_req *)) read_alloc_count_1_svc;
-		break;
-
-	case write_alloc_count:
-		_xdr_argument = (xdrproc_t) xdr_int;
-		_xdr_result = (xdrproc_t) xdr_int;
-		local = (char *(*)(char *, struct svc_req *)) write_alloc_count_1_svc;
-		break;
-
-	case read_alloc_size:
-		_xdr_argument = (xdrproc_t) xdr_void;
-		_xdr_result = (xdrproc_t) xdr_int;
-		local = (char *(*)(char *, struct svc_req *)) read_alloc_size_1_svc;
-		break;
-
-	case write_alloc_size:
-		_xdr_argument = (xdrproc_t) xdr_int;
-		_xdr_result = (xdrproc_t) xdr_int;
-		local = (char *(*)(char *, struct svc_req *)) write_alloc_size_1_svc;
 		break;
 
 	default:

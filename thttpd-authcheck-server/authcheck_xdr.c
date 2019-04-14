@@ -10,6 +10,7 @@ xdr_shttpd_conn (XDR *xdrs, shttpd_conn *objp)
 {
 	register int32_t *buf;
 
+	int i;
 
 	if (xdrs->x_op == XDR_ENCODE) {
 		buf = XDR_INLINE (xdrs, 15 * BYTES_PER_XDR_UNIT);
@@ -62,25 +63,25 @@ xdr_shttpd_conn (XDR *xdrs, shttpd_conn *objp)
 		IXDR_PUT_LONG(buf, objp->bytes_to_send);
 		IXDR_PUT_LONG(buf, objp->range_if);
 		}
-		 if (!xdr_string (xdrs, &objp->dirname, 100))
+		 if (!xdr_opaque (xdrs, objp->dirname, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->authorization, 100))
+		 if (!xdr_opaque (xdrs, objp->authorization, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->hostdir, 100))
+		 if (!xdr_opaque (xdrs, objp->hostdir, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->remoteuser, 100))
+		 if (!xdr_opaque (xdrs, objp->remoteuser, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->encodedurl, 100))
+		 if (!xdr_opaque (xdrs, objp->encodedurl, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->useragent, 100))
+		 if (!xdr_opaque (xdrs, objp->useragent, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->charset, 100))
+		 if (!xdr_opaque (xdrs, objp->charset, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->protocol, 100))
+		 if (!xdr_opaque (xdrs, objp->protocol, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->p3p, 100))
+		 if (!xdr_opaque (xdrs, objp->p3p, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->response, 500))
+		 if (!xdr_opaque (xdrs, objp->response, BUFFER_SIZE))
 			 return FALSE;
 		return TRUE;
 	} else if (xdrs->x_op == XDR_DECODE) {
@@ -134,25 +135,25 @@ xdr_shttpd_conn (XDR *xdrs, shttpd_conn *objp)
 		objp->bytes_to_send = IXDR_GET_LONG(buf);
 		objp->range_if = IXDR_GET_LONG(buf);
 		}
-		 if (!xdr_string (xdrs, &objp->dirname, 100))
+		 if (!xdr_opaque (xdrs, objp->dirname, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->authorization, 100))
+		 if (!xdr_opaque (xdrs, objp->authorization, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->hostdir, 100))
+		 if (!xdr_opaque (xdrs, objp->hostdir, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->remoteuser, 100))
+		 if (!xdr_opaque (xdrs, objp->remoteuser, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->encodedurl, 100))
+		 if (!xdr_opaque (xdrs, objp->encodedurl, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->useragent, 100))
+		 if (!xdr_opaque (xdrs, objp->useragent, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->charset, 100))
+		 if (!xdr_opaque (xdrs, objp->charset, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->protocol, 100))
+		 if (!xdr_opaque (xdrs, objp->protocol, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->p3p, 100))
+		 if (!xdr_opaque (xdrs, objp->p3p, BUFFER_SIZE))
 			 return FALSE;
-		 if (!xdr_string (xdrs, &objp->response, 500))
+		 if (!xdr_opaque (xdrs, objp->response, BUFFER_SIZE))
 			 return FALSE;
 	 return TRUE;
 	}
@@ -187,25 +188,25 @@ xdr_shttpd_conn (XDR *xdrs, shttpd_conn *objp)
 		 return FALSE;
 	 if (!xdr_long (xdrs, &objp->range_if))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->dirname, 100))
+	 if (!xdr_opaque (xdrs, objp->dirname, BUFFER_SIZE))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->authorization, 100))
+	 if (!xdr_opaque (xdrs, objp->authorization, BUFFER_SIZE))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->hostdir, 100))
+	 if (!xdr_opaque (xdrs, objp->hostdir, BUFFER_SIZE))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->remoteuser, 100))
+	 if (!xdr_opaque (xdrs, objp->remoteuser, BUFFER_SIZE))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->encodedurl, 100))
+	 if (!xdr_opaque (xdrs, objp->encodedurl, BUFFER_SIZE))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->useragent, 100))
+	 if (!xdr_opaque (xdrs, objp->useragent, BUFFER_SIZE))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->charset, 100))
+	 if (!xdr_opaque (xdrs, objp->charset, BUFFER_SIZE))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->protocol, 100))
+	 if (!xdr_opaque (xdrs, objp->protocol, BUFFER_SIZE))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->p3p, 100))
+	 if (!xdr_opaque (xdrs, objp->p3p, BUFFER_SIZE))
 		 return FALSE;
-	 if (!xdr_string (xdrs, &objp->response, 500))
+	 if (!xdr_opaque (xdrs, objp->response, BUFFER_SIZE))
 		 return FALSE;
 	return TRUE;
 }

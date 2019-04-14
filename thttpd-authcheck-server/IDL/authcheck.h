@@ -13,6 +13,7 @@
 extern "C" {
 #endif
 
+#define BUFFER_SIZE 200
 
 struct shttpd_conn {
 	int global_passwd;
@@ -30,16 +31,16 @@ struct shttpd_conn {
 	long last_byte_index;
 	long bytes_to_send;
 	long range_if;
-	char *dirname;
-	char *authorization;
-	char *hostdir;
-	char *remoteuser;
-	char *encodedurl;
-	char *useragent;
-	char *charset;
-	char *protocol;
-	char *p3p;
-	char *response;
+	char dirname[BUFFER_SIZE];
+	char authorization[BUFFER_SIZE];
+	char hostdir[BUFFER_SIZE];
+	char remoteuser[BUFFER_SIZE];
+	char encodedurl[BUFFER_SIZE];
+	char useragent[BUFFER_SIZE];
+	char charset[BUFFER_SIZE];
+	char protocol[BUFFER_SIZE];
+	char p3p[BUFFER_SIZE];
+	char response[BUFFER_SIZE];
 };
 typedef struct shttpd_conn shttpd_conn;
 
@@ -51,36 +52,12 @@ typedef struct shttpd_conn shttpd_conn;
 #define my_auth_check2 1
 extern  int * my_auth_check2_1(shttpd_conn *, CLIENT *);
 extern  int * my_auth_check2_1_svc(shttpd_conn *, struct svc_req *);
-#define read_alloc_count 2
-extern  int * read_alloc_count_1(void *, CLIENT *);
-extern  int * read_alloc_count_1_svc(void *, struct svc_req *);
-#define write_alloc_count 3
-extern  int * write_alloc_count_1(int *, CLIENT *);
-extern  int * write_alloc_count_1_svc(int *, struct svc_req *);
-#define read_alloc_size 4
-extern  int * read_alloc_size_1(void *, CLIENT *);
-extern  int * read_alloc_size_1_svc(void *, struct svc_req *);
-#define write_alloc_size 5
-extern  int * write_alloc_size_1(int *, CLIENT *);
-extern  int * write_alloc_size_1_svc(int *, struct svc_req *);
 extern int authprog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define my_auth_check2 1
 extern  int * my_auth_check2_1();
 extern  int * my_auth_check2_1_svc();
-#define read_alloc_count 2
-extern  int * read_alloc_count_1();
-extern  int * read_alloc_count_1_svc();
-#define write_alloc_count 3
-extern  int * write_alloc_count_1();
-extern  int * write_alloc_count_1_svc();
-#define read_alloc_size 4
-extern  int * read_alloc_size_1();
-extern  int * read_alloc_size_1_svc();
-#define write_alloc_size 5
-extern  int * write_alloc_size_1();
-extern  int * write_alloc_size_1_svc();
 extern int authprog_1_freeresult ();
 #endif /* K&R C */
 
