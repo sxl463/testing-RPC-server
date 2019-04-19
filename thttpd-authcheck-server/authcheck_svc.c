@@ -4,6 +4,8 @@
  */
 
 #include "authcheck.h"
+#include <sys/syslog.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <rpc/pmap_clnt.h>
@@ -21,6 +23,9 @@ authprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 {
 	union {
 		shttpd_conn my_auth_check2_1_arg;
+		int write_alloc_count_1_arg;
+		int write_alloc_size_1_arg;
+		long my_httpd_logstats_1_arg;
 	} argument;
 	char *result;
 	xdrproc_t _xdr_argument, _xdr_result;
@@ -35,6 +40,36 @@ authprog_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		_xdr_argument = (xdrproc_t) xdr_shttpd_conn;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (char *(*)(char *, struct svc_req *)) my_auth_check2_1_svc;
+		break;
+
+	case read_alloc_count:
+		_xdr_argument = (xdrproc_t) xdr_void;
+		_xdr_result = (xdrproc_t) xdr_int;
+		local = (char *(*)(char *, struct svc_req *)) read_alloc_count_1_svc;
+		break;
+
+	case write_alloc_count:
+		_xdr_argument = (xdrproc_t) xdr_int;
+		_xdr_result = (xdrproc_t) xdr_int;
+		local = (char *(*)(char *, struct svc_req *)) write_alloc_count_1_svc;
+		break;
+
+	case read_alloc_size:
+		_xdr_argument = (xdrproc_t) xdr_void;
+		_xdr_result = (xdrproc_t) xdr_int;
+		local = (char *(*)(char *, struct svc_req *)) read_alloc_size_1_svc;
+		break;
+
+	case write_alloc_size:
+		_xdr_argument = (xdrproc_t) xdr_int;
+		_xdr_result = (xdrproc_t) xdr_int;
+		local = (char *(*)(char *, struct svc_req *)) write_alloc_size_1_svc;
+		break;
+
+	case my_httpd_logstats:
+		_xdr_argument = (xdrproc_t) xdr_long;
+		_xdr_result = (xdrproc_t) xdr_int;
+		local = (char *(*)(char *, struct svc_req *)) my_httpd_logstats_1_svc;
 		break;
 
 	default:
@@ -83,6 +118,8 @@ main (int argc, char **argv)
 		fprintf (stderr, "%s", "unable to register (AUTHPROG, AUTHVERSION, tcp).");
 		exit(1);
 	}
+
+        openlog("thttpd", LOG_NDELAY|LOG_PID, 24);
 
 	svc_run ();
 	fprintf (stderr, "%s", "svc_run returned");

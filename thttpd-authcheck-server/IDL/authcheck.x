@@ -37,6 +37,11 @@ typedef struct shttpd_conn shttpd_conn;
 program AUTHPROG {
     version AUTHVERSION {
         int my_auth_check2(shttpd_conn) = 1;
+	int read_alloc_count(void) = 2;
+	int write_alloc_count(int) = 3;
+	int read_alloc_size(void) = 4;
+	int write_alloc_size(int) = 5;
+        int my_httpd_logstats(long) = 6;
     } = 1;
 } = 0x23451124;
 

@@ -929,6 +929,16 @@ my_auth_check2_1_svc(shttpd_conn* shc, struct svc_req *rqstp)
 	return(&ret);
 }
 
+int * my_httpd_logstats_1_svc(long* secs, struct svc_req *rqstp){
+	static int ret;
+	printf("httpd_logstats_1_svc, secs:%ld\n", *secs);
+        
+	httpd_logstats(*secs);
+
+	return (&ret);
+}
+
+
 //static int str_alloc_count = 0;
 //static size_t str_alloc_size = 0;
 int* read_alloc_count_1_svc(void* pv, struct svc_req* rqstp){
